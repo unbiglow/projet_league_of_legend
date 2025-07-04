@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="/list">
+    <input type="text" name="title" placeholder="Nouvelle tâche" required>
+    <button type="submit">Ajouter</button>
+</form>
+
+<h2>Tâches à faire</h2>
+<ul>
+  {% for task in users if not task.done %}
+    <li>
+      {{ task.title }}
+      <form method="POST" action="/complete/{{ task.id }}" style="display:inline;">
+        <button type="submit">Fini !</button>
+      </form>
+    </li>
+  {% else %}
+    <li>Aucune tâche à faire</li>
+  {% endfor %}
+</ul>
+
+<h2>Tâches terminées</h2>
+<ul>
+  {% for task in users if task.done %}
+    <li>
+      {{ task.title }}
+      <form method="POST" action="/delete/{{ task.id }}" style="display:inline;">
+        <button type="submit">Supprimer</button>
+      </form>
+    </li>
+  {% else %}
+    <li>Aucune tâche terminée</li>
+  {% endfor %}
+</ul>
+{% endblock %}
