@@ -1,8 +1,10 @@
 from flask import Flask, request, render_template ,redirect,url_for
 import os
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 
-
+# Chemin vers le .env : un dossier au-dessus de app_flask/
+load_dotenv()
 print("DATABASE_URL env var =", os.environ.get('DATABASE_URL'))
 
 app = Flask(__name__)
