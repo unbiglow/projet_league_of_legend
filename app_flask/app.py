@@ -1,14 +1,12 @@
 from flask import Flask, request, render_template ,redirect,url_for
 import os
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
 
 # Chemin vers le .env : un dossier au-dessus de app_flask/
-load_dotenv()
-print("DATABASE_URL env var =", os.environ.get('DATABASE_URL'))
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+# Exemple : postgres://user:password@host:port/dbname
+DATABASE_URL = os.environ.get("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 db = SQLAlchemy(app)
 
 print("SQLALCHEMY_DATABASE_URI config =", app.config.get('SQLALCHEMY_DATABASE_URI'))
@@ -73,4 +71,4 @@ def health():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True,port=10000)

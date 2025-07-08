@@ -32,10 +32,10 @@ RUN apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* \ /var
 
 
 # 7. LE CONTENEUR ECOUTE LE PORT DEFINI
-EXPOSE 5000
+EXPOSE 10000
 
 # 8. MECANISME DOCKER DE SURVEILLANCE DE LA SANTE DU CONTENEUR. SI LA REQUETE ECHOUE LE CONTENEUR DEVIENDRA "UNHEALTHY".
-HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:10000/health || exit 1
 
 # 9. LANCEMENT DE L'APPLICATION
 #   9.1. LANCE STREAMLIT
